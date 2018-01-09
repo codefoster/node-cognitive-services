@@ -1,5 +1,3 @@
-import { exec } from "child_process";
-
 export class speakerRecognition {
 	constructor(options: SpeakerRecognitionOptions);
 

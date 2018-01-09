@@ -13,11 +13,19 @@ export * from './bingWebSearch';
 export * from './computerVision';
 export * from './emotion';
 export * from './entityLinking';
-export * from './face';
+// export * from './face';
 export * from './qnaMaker';
 export * from './recommendations';
-export * from './speakerRecognition';
+
+import { speakerIdentification as speakerIdentificationNamespace } from './speakerIdentification';
+// export { speakerIdentification } from './speakerIdentification';
+declare let speakerIdentification:speakerIdentificationNamespace.SpeakerIdentification;
+
+export * from './speakerVerification';
+
+
 export * from './textAnalytics';
-export * from './textTranslator';
+// export * from './textTranslator';
 export * from './video';
 export * from './webLanguageModel';
+
