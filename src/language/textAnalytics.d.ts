@@ -8,7 +8,7 @@ import { ContentTypeHeaders } from "../index";
  * This API uses advanced natural language processing techniques to deliver best in class predictions.
  */
 export class textAnalytics {
-	constructor(options: TextAnalyticsOptions);
+	constructor(CommonConstructorOptions);
 
 	/**
 	 * The API returns the detected language and a numeric score between 0 and 1. 
@@ -29,11 +29,6 @@ export class textAnalytics {
 	 * Sentiment score is generated using classification techniques. The input features to the classifier include n-grams, features generated from part-of-speech tags, and word embeddings.
 	 */
 	sentiment(options: SentimentOptions): Promise<SentimentReturnValue>;
-}
-
-export interface TextAnalyticsOptions {
-	akiKey: string,
-	endpoint: string
 }
 
 export interface DetectLanguageOptions {

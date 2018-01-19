@@ -5,7 +5,7 @@
 
 export class textTranslator {
 
-	constructor(options: TextTranslatorOptions);
+	constructor(CommonConstructorOptions);
 	
 	/**
 	 * Adds a translation to the translation memory.
@@ -78,11 +78,6 @@ export class textTranslator {
 	 * Use the TranslateArray method to retrieve translations for multiple source texts.
 	 */
 	translateArray(options: TranslateArrayOptions): Promise<TranslateArrayReturnValue>;
-}
-
-export interface TextTranslatorOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface AddTranslationOptions {

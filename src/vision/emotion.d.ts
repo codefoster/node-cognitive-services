@@ -1,14 +1,9 @@
 import { ContentTypeHeaders } from "../index";
 
 export class emotion {
-	constructor(options: EmotionOptions);
+	constructor(CommonConstructorOptions);
 	emotionRecognition(options: EmotionRecognitionOptions): Promise<EmotionRecognitionReturnValue>;
 	emotionRecognitionWithFaceRectangles(options: EmotionRecognitionWithFaceRectanglesOptions): Promise<EmotionRecognitionWithFaceRectanglesReturnValue>;
-}
-
-export interface EmotionOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 //# region emotionRecognition

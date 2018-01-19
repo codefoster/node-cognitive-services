@@ -1,16 +1,11 @@
 
 export class bingWebSearch {
-	constructor(options: BingWebSearchOptions);
+	constructor(CommonConstructorOptions);
 	
 	/**
 	 * Get web, image, news, & videos results for a given query.
 	 */
 	search(options: SearchWebOptions): Promise<SearchWebReturnValue>;
-}
-
-export interface BingWebSearchOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface SearchWebOptions {

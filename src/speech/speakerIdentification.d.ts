@@ -1,7 +1,7 @@
 import { ContentTypeHeaders } from "../index";
 
 export class speakerIdentification {
-	constructor(options: SpeakerIdentificationOptions);
+	constructor(CommonConstructorOptions);
 	createEnrollment(options: IdentificationProfileCreateEnrollmentOptions): Promise <void>;
 	createProfile(options: IdentificationProfileCreateProfileOptions): Promise<IdentificationProfileCreateProfileReturnValue>;
 	deleteProfile(options: IdentificationProfileDeleteProfileOptions): Promise<void>;
@@ -10,11 +10,6 @@ export class speakerIdentification {
 	resetEnrollmentsForProfile(options: IdentificationProfileResetEnrollmentsOptions): Promise<void>;
 	getOperationStatus(options: GetOperationStatusOptions): Promise<GetOperationStatusReturnValue>;
 	identify(options: IdentifySpeakerOptions): Promise<void>;
-}
-
-export interface SpeakerIdentificationOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 //Identification Profile Create Enrollment Options

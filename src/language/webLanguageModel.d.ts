@@ -1,5 +1,7 @@
+import { ContentTypeHeaders } from "../index";
+
 export class webLanguageModel {
-	constructor(options: WebLanguageModelOptions);
+	constructor(CommonConstructorOptions);
 
 	/**
 	 * 
@@ -27,11 +29,6 @@ export class webLanguageModel {
 	 * List models available currently.
 	 */
 	listAvailableModels(): Promise<ListAvailableModelsReturnValue>;
-}
-
-export interface WebLanguageModelOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface BreakIntoWordsOptions {

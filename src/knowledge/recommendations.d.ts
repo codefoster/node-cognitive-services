@@ -5,7 +5,7 @@
  */
 export class recommendations {
 
-	constructor(options: RecommendationsOptions);
+	constructor(CommonConstructorOptions);
 
 	/**
 	 * Cancels an ongoing operation. One example is to cancel a build request that was submitted.
@@ -70,11 +70,6 @@ export class recommendations {
 	uploadACatalogFileToAModel(options: any): any;
 	uploadAUsageFileToAModel(options: any): any;
 	uploadUsageEvent(options: any): any;
-}
-
-export interface RecommendationsOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface CancelOperationOptions {

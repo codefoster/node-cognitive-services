@@ -1,7 +1,7 @@
 import { ContentTypeHeaders, CommonConstructorOptions } from "..";
 
 export class computerVision {
-	constructor(options: CommonConstructorOptions);
+	constructor(CommonConstructorOptions);
 	analyzeImage(options: AnalyzeImageOptions): Promise<AnalyzeImageReturnValue>;
 	describeImage(options: DescribeImageOptions): Promise<DescribeImageReturnValue>;
 	getHandwrittenTextOperationResult(options: GetHandwrittenTextOperationResultOptions): Promise<GetHandwrittenTextOperationResultReturnValue>;

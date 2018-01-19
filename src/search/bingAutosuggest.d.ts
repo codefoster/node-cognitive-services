@@ -1,15 +1,10 @@
 export class bingAutosuggest {
-	constructor(options: BingAutosuggestOptions);
+	constructor(CommonConstructorOptions);
 	
 	/**
 	 * This operation provides suggestions for a given query or partial query.
 	 */
 	suggestions(options: SuggestionsOptions): Promise<SuggestionsReturnValue>;
-}
-
-export interface BingAutosuggestOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface SuggestionsOptions {
