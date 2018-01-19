@@ -1,13 +1,8 @@
 import { ContentTypeHeaders } from "../index";
 
 export class bingSpellCheck {
-	constructor(options: BingSpellCheckOptions);
+	constructor(CommonConstructorOptions);
 	spellCheck(options: SpellCheckOptions): Promise<SpellCheckReturnValue>;
-}
-
-export interface BingSpellCheckOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface SpellCheckOptions {

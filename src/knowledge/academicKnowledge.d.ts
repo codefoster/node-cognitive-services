@@ -1,5 +1,5 @@
 export class academicKnowledge {
-	constructor(options: academicKnowledgeOptions);
+	constructor(CommonConstructorOptions);
 
 	/**
 	 * The calchistogram REST API is used to calculate the distribution of attribute values for a set of paper entities.
@@ -45,11 +45,6 @@ export class academicKnowledge {
 	 * The similarity REST API is used to calculate a floating point value based on 2 text inputs.
 	 */
 	postSimilarity(options: PostSimilarityOptions): Promise<string>;
-}
-
-export interface academicKnowledgeOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 // Calc Histogram

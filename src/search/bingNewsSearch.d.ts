@@ -2,7 +2,7 @@
  * The News API lets partners send a search query to Bing and get back a list of relevant news articles. Note you should call the News API if you need news content only. If you need other content such as images and webpages in addition to images, you must call the Search API which includes news articles in the response. You must display the news articles in the order provided in the response.
  */
 export class bingNewsSearch {
-	constructor(options: BingNewsSearchOptions);
+	constructor(CommonConstructorOptions);
 	
 	/**
 	 * Returns news for a provided category.
@@ -13,11 +13,6 @@ export class bingNewsSearch {
 	
 	trendingTopics(options: TrendingTopicsOptions): Promise<TrendingTopicsReturnValue>;
 	 
-}
-
-export interface BingNewsSearchOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface CategoryNewsOptions {

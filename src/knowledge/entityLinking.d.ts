@@ -5,13 +5,8 @@ import { ContentTypeHeaders } from "../index";
 * Entity Linking recognize a named-entity from given text and aligning a textual mention of the entity to an appropriate entry in a knowledge base.
 */
 export class entityLinking {
-	constructor(options: EntityLinkingOptions);
+	constructor(CommonConstructorOptions);
     linkEntity(options: LinkEntityOptions): Promise<LinkEntityReturnValue>;
-}
-
-export interface EntityLinkingOptions{
-    apiKey: string,
-    endpoint: string
 }
 
 export interface LinkEntityOptions {

@@ -5,7 +5,7 @@
  * You must display the videos in the order provided in the response.
  */
 export class bingVideoSearch {
-	constructor(options: BingVideoSearchOptions);
+	constructor(CommonConstructorOptions);
 
 	/**
 	 * Get videos relevant for a given query.
@@ -21,11 +21,6 @@ export class bingVideoSearch {
 	 * Get currently trending videos.
 	 */
 	trending(): Promise<TrendingReturnValue>;
-}
-
-export interface BingVideoSearchOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface SearchOptions {

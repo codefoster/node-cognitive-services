@@ -1,5 +1,5 @@
 export class qnaMaker {
-	constructor(_ref: any);
+	constructor(CommonConstructorOptions);
 
 	/**
 	 * Creates a new knowledge base.

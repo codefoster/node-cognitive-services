@@ -1,7 +1,7 @@
 import { ContentTypeHeaders } from "../index";
 
 export class speakerVerification {
-	constructor(options: SpeakerVerification);
+	constructor(CommonConstructorOptions);
 	listAllSupportedVerificationPhrases(options: ListAllSupportedVerificationPhrasesOptions): Promise<ListAllSupportedVerificationPhrasesReturnValue[]>;
 	verify(options: SpeakerRecognitionVerificationOptions): Promise<SpeakerRecognitionVerificationReturnValue>;
 	createEnrollment(options: VerificationProfileCreateEnrollmentOptions): Promise<VerificationProfileCreateEnrollmentReturnValue>;
@@ -10,11 +10,6 @@ export class speakerVerification {
 	getAllProfiles(): Promise<VerificationProfileGetAllProfilesReturnValue>;
 	getProfile(options: VerificationProfileGetProfileOptions): Promise<VerificationProfileGetProfileReturnValue>;
 	resetEnrollments(options: VerificationProfileResetEnrollmentsOptions): Promise<void>;
-}
-
-export interface SpeakerVerification {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface SpeakerRecognitionVerificationOptions {

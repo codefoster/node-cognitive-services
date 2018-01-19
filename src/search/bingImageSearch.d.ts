@@ -1,5 +1,5 @@
 export class bingImageSearch {
-	constructor(options: BingImageSearchOptions);
+	constructor(CommonConstructorOptions);
 	
 	/**
 	 * Returns insights about an image, such as webpages that include the image.
@@ -15,11 +15,6 @@ export class bingImageSearch {
 	 * Get currently trending images.
 	 */
 	trending(): Promise<TrendingImageReturnValue>;
-}
-
-export interface BingImageSearchOptions {
-	apiKey: string,
-	endpoint: string
 }
 
 export interface ImageInsightsOptions {
