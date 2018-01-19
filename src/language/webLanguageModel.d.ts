@@ -1,3 +1,5 @@
+import { ContentTypeHeaders } from "../index";
+
 export class webLanguageModel {
 	constructor(options: WebLanguageModelOptions);
 
