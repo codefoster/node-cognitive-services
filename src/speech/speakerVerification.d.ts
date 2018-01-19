@@ -19,13 +19,8 @@ export interface SpeakerVerification {
 
 export interface SpeakerRecognitionVerificationOptions {
 	parameters: SpeakerRecognitionVerificationParameters,
-<<<<<<< HEAD
 	headers: ContentTypeHeaders,
 	body: { "url?: string" } | any
-=======
-	headers: SpeakerRecognitionVerificationHeaders,
-	body: { url?: string } | any
->>>>>>> master
 }
 
 export interface SpeakerRecognitionVerificationParameters {

@@ -1,6 +1,5 @@
 import { ContentTypeHeaders } from "../index";
 
-
 export class emotion {
 	constructor(options: EmotionOptions);
 	emotionRecognition(options: EmotionRecognitionOptions): Promise<EmotionRecognitionReturnValue>;
@@ -55,7 +54,6 @@ export interface EmotionRecognitionWithFaceRectanglesParameters {
 }
 
 export interface EmotionRecognitionWithFaceRectanglesReturnValue {
-
 	faceRectangle: {
 		left: number,
 		top: number,
