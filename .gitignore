@@ -41,3 +41,5 @@ dist
 
 #Type Tests
 test/**/*TypeTest.js
+
+.env
