@@ -37,6 +37,7 @@
     "xmlbuilder": "^9.0.4"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.8.6",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "gulp": "^3.9.1",
