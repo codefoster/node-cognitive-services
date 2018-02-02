@@ -17,7 +17,7 @@ export class computerVision {
 export interface AnalyzeImageOptions {
 	parameters: AnalyzeImageParameters,
 	headers?: ContentTypeHeaders,
-	body?: { "url"?: string }
+	body?: { url?: string }
 }
 
 export interface AnalyzeImageParameters {
