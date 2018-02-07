@@ -1,3 +1,5 @@
+import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
+
 export class qnaMaker {
 	constructor(CommonConstructorOptions);
 
@@ -86,15 +88,8 @@ export interface CreateKnowledgeBaseReturnValue {
 
 //#region deleteKnowledgeBase
 export interface DeleteKnowledgeBaseOptions {
-	headers?: DeleteKnowledgeBaseHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: DeleteKnowledgeBaseParameters
-}
-
-export interface DeleteKnowledgeBaseHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your QnAMaker Service accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key"?: string
 }
 
 export interface DeleteKnowledgeBaseParameters {
@@ -108,15 +103,8 @@ export interface DeleteKnowledgeBaseParameters {
 
 //#region downloadKnowledgeBase
 export interface DownloadKnowledgeBaseOptions {
-	headers?: DownloadKnowledgeBaseHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: DownloadKnowledgeBaseParameters
-}
-
-export interface DownloadKnowledgeBaseHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your QnAMaker Service accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface DownloadKnowledgeBaseParameters {
@@ -129,21 +117,8 @@ export interface DownloadKnowledgeBaseParameters {
 
 //#region generateAnswer
 export interface GenerateAnswerOptions {
-	headers?: GenerateAnswerHeaders,
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	parameters?: GenerateAnswerParameters
-}
-
-export interface GenerateAnswerHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your QnAMaker Service accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key": string,
-
-	/**
-	 * Media type of the body sent to the API. 
-	 */
-	"Content-Type"?: string
-
 }
 
 export interface GenerateAnswerParameters {
@@ -164,15 +139,8 @@ export interface GenerateAnswerReturnValue {
 
 //#region getAlterations
 export interface GetAlterationsOptions {
-	headers?: GetAlterationsHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: GetAlterationsParameters
-}
-
-export interface GetAlterationsHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your QnAMaker Service accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface GetAlterationsParameters {
@@ -192,15 +160,8 @@ export interface GetAlterationsReturnValue {
 
 //#region publishKnowledgeBase
 export interface PublishKnowledgeBaseOptions {
-	headers?: PublishKnowledgeBaseHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: PublishKnowledgeBaseParameters
-}
-
-export interface PublishKnowledgeBaseHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your QnAMaker Service accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface PublishKnowledgeBaseParameters {

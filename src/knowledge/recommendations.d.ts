@@ -1,3 +1,5 @@
+import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
+
 /**
  * The Recommendations API identifies consumption patterns from your transaction information in order to provide recommendations. 
  * These recommendations can help your customers more easily discover items that they may be interested in.
@@ -74,7 +76,7 @@ export class recommendations {
 
 export interface CancelOperationOptions {
 	parameters: CancelOperationParameters,
-	headers: CancelOperationHeaders
+	headers: OcpApimSubscriptionKeyHeaders
 }
 
 export interface CancelOperationParameters {
@@ -84,16 +86,9 @@ export interface CancelOperationParameters {
 	id: string
 }
 
-export interface CancelOperationHeaders {
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string 
-}
-
 export interface CreateBusinessRuleOptions {
 	parameters: CreateBusinessRuleParameters,
-	headers: CreateBusinessRuleHeaders,
+	headers: OcpApimSubscriptionKeyHeaders & ContentTypeHeaders,
 	body: CreateBusinessRuleBody
 }
 
@@ -102,18 +97,6 @@ export interface CreateBusinessRuleParameters {
 	 * Unique identifier of the model
 	 */
 	modelId: string
-}
-
-export interface CreateBusinessRuleHeaders {
-	/**
-	 * Media type of the body sent to the API.
-	 */
-	"Content-Type"?:string, 
-	
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface CreateBusinessRuleBody {
@@ -174,20 +157,8 @@ export interface CreateBusinessRuleReturnValue {
 }
 
 export interface CreateAModelOptions {
-	headers: CreateAModelHeaders,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	body: CreateAModelBody
-}
-
-export interface CreateAModelHeaders {
-	/**
-	 * Media type of the body sent to the API.
-	 */
-	"Content-Type"?:string, 
-	
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface CreateAModelBody {
@@ -207,7 +178,7 @@ export interface CreateAModelReturnValue {
 
 export interface CreateOrTriggerABuildOptions {
 	parameters: CreateOrTriggerABuildParameters,
-	headers: CreateOrTriggerABuildHeaders,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	body:CreateOrTriggerABuildeBody
 }
 
@@ -216,18 +187,6 @@ export interface CreateOrTriggerABuildParameters {
 	 * Unique identifier of the model
 	 */
 	modelId: string
-}
-
-export interface CreateOrTriggerABuildHeaders {
-	/**
-	 * Media type of the body sent to the API.
-	 */
-	"Content-Type"?:string, 
-	
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface CreateOrTriggerABuildeBody {

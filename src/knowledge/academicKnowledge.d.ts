@@ -1,3 +1,5 @@
+import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
+
 export class academicKnowledge {
 	constructor(CommonConstructorOptions);
 
@@ -50,7 +52,7 @@ export class academicKnowledge {
 // Calc Histogram
 export interface CalcHistogramOptions {
 	parameters?: CalcHistogramParameters,
-	headers?: CalcHistogramHeaders
+	headers?: OcpApimSubscriptionKeyHeaders
 }
 
 export interface CalcHistogramParameters {
@@ -80,13 +82,6 @@ export interface CalcHistogramParameters {
 	offset?: number
 }
 
-export interface CalcHistogramHeaders {
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key"?: string
-}
-
 export interface CalcHistogramReturnValue {
 	expr: string,
 	num_entities: number,
@@ -105,20 +100,8 @@ export interface CalcHistogramReturnValue {
 
 //Calc Histogram POST
 export interface CalcHistogramPostOptions {
-	headers?: CalcHistogramPostHeaders,
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	body?: CalcHistogramPostBody
-}
-
-export interface CalcHistogramPostHeaders {
-	/**
-	 * Media type of the body sent to the API. 
-	 */
-	"Content-Type"?: string,
-
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key"?: string
 }
 
 export interface CalcHistogramPostBody {
@@ -132,11 +115,7 @@ export interface CalcHistogramPostBody {
 //Evaluate
 export interface EvaluateOptions {
 	parameters?: EvaluateParameters,
-	headers?: EvaluateHeaders,
-}
-
-export interface EvaluateHeaders {
-	"Ocp-Apim-Subscription-Key"?: string
+	headers?: OcpApimSubscriptionKeyHeaders
 }
 
 export interface EvaluateParameters {
@@ -196,27 +175,14 @@ export interface EvaluateReturnValue {
 
 //Evaluate POST
 export interface EvaluatePostOptions {
-	headers?: EvaluatePostHeaders,
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	body?: EvaluateBody
 }
-
-export interface EvaluatePostHeaders {
-	/**
-	 * Media type of the body sent to the API. 
-	 */
-	"Content-Type"?: string,
-
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key"?: string
-}
-
 
 //Get Similarity
 export interface GetSimilarityOptions {
 	parameters?: GetSimilarityParameters,
-	headers?: GetSimilarityHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 }
 
 export interface GetSimilarityParameters {
@@ -231,17 +197,10 @@ export interface GetSimilarityParameters {
 	s2: string
 }
 
-export interface GetSimilarityHeaders {
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
-}
-
 //Graph Search
 export interface GraphSearchOptions {
 	body?: GraphSearchBody,
-	headers?: GraphSearchHeaders,
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	parameters?: GraphSearchParameters
 }
 
@@ -252,17 +211,6 @@ export interface GraphSearchParameters {
 	mode: string
 }
 
-export interface GraphSearchHeaders {
-	/*
-	 * Media type of the body sent to the API. 
-	 */
-	"Content-Type"?: string,
-
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
-}
 export interface GraphSearchBody {
 	path: string,
 	paper: {
@@ -287,7 +235,8 @@ export interface GraphSearchReturnValue {
 
 //Interpret
 export interface InterpretOptions {
-	parameters?: InterpretParameters
+	parameters?: InterpretParameters,
+	headers: OcpApimSubscriptionKeyHeaders
 }
 
 export interface InterpretParameters {
@@ -322,13 +271,6 @@ export interface InterpretParameters {
 	model?: string
 }
 
-export interface InterpretHeaders {
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
-}
-
 export interface InterpretReturnValue {
 	query: string,
 	interpretations: {
@@ -346,24 +288,12 @@ export interface InterpretReturnValue {
 
 //Interpret POST
 export interface InterpretPostOptions {
-	headers?: InterpretPostHeaders
-}
-
-export interface InterpretPostHeaders {
-	/**
-	 * Media type of the body sent to the API. 
-	 */
-	"Content-Type"?: string,
-
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
 }
 
 //Post Similarity
 export interface PostSimilarityOptions {
-	headers?: PostSimilarityHeaders,
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
 	body?: string
 }
 
@@ -374,14 +304,3 @@ export interface PostSimilarityParameters {
 	body: string
 }
 
-export interface PostSimilarityHeaders {
-	/**
-	 * Media type of the body sent to the API. 
-	 */
-	"Content-Type"?: string,
-
-	/**
-	 * Subscription key which provides access to this API.
-	 */
-	"Ocp-Apim-Subscription-Key": string
-}
