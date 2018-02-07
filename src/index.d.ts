@@ -28,6 +28,13 @@ export interface ContentTypeHeaders {
 	 */
 	"Content-Type"?: ContentTypeHeaderTypes
 }
+
+export interface OcpApimSubscriptionKeyHeaders{
+	/**
+	 * Subscription key which provides access to this API. Found in your Cognitive Services accounts. 
+	 */
+	"Ocp-Apim-Subscription-Key"?: String
+}
 export type ContentTypeHeaderTypes = 'application/json'|'application/octet-stream'|'multipart/form-data';
 
 export interface CommonConstructorOptions {
