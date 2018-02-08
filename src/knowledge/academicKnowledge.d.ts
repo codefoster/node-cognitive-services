@@ -1,7 +1,7 @@
-import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
+import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders, CommonConstructorOptions } from "../index";
 
 export class academicKnowledge {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 
 	/**
 	 * The calchistogram REST API is used to calculate the distribution of attribute values for a set of paper entities.

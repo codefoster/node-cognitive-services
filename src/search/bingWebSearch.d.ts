@@ -1,7 +1,8 @@
+import { CommonConstructorOptions } from "../index";
 
 export class bingWebSearch {
-	constructor(CommonConstructorOptions);
-	
+	constructor(options: CommonConstructorOptions);
+
 	/**
 	 * Get web, image, news, & videos results for a given query.
 	 */
@@ -13,27 +14,27 @@ export interface SearchWebOptions {
 }
 
 export interface SearchWebParameters {
-	
+
 	/**
 	 * The user's search query string
 	 */
 	q: string,
-	
+
 	/**
 	 * The number of video results to return in the response. The actual number delivered may be less than requested.
 	 */
 	count: number,
-	
+
 	/**
 	 * The zero-based offset that indicates the number of video results to skip before returning results.
 	 */
 	offset?: number,
-	
+
 	/**
 	 * The market where the results come from. Typically, this is the country where the user is making the request from; however, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form -. For example, en-US.
 	 */
 	mkt?: string,
-	
+
 	/**
 	 * A filter used to filter results for adult content.
 	 */
@@ -42,15 +43,15 @@ export interface SearchWebParameters {
 
 export interface SearchWebReturnValue {
 	_type: string,
-    instrumentation: {
-        pingUrlBase: string,
-        pageLoadPingUrl: string
-    },
-    webPages: {
-        webSearchUrl: string,
-        webSearchUrlPingSuffix: string,
-        totalEstimatedMatches: number,
-        value: {
+	instrumentation: {
+		pingUrlBase: string,
+		pageLoadPingUrl: string
+	},
+	webPages: {
+		webSearchUrl: string,
+		webSearchUrlPingSuffix: string,
+		totalEstimatedMatches: number,
+		value: {
 			id: string,
 			name: string,
 			url: string,
@@ -67,16 +68,16 @@ export interface SearchWebReturnValue {
 			}[],
 			dateLastCrawled: string
 		}[]
-    },
-    images: {
-        id: string,
-        readLink: string,
-        webSearchUrl: string,
-        webSearchUrlPingSuffix: string,
-        isFamilyFriendly: boolean,
-        value: {
+	},
+	images: {
+		id: string,
+		readLink: string,
+		webSearchUrl: string,
+		webSearchUrlPingSuffix: string,
+		isFamilyFriendly: boolean,
+		value: {
 			name: string,
-				webSearchUrl: string,
+			webSearchUrl: string,
 			webSearchUrlPingSuffix: string,
 			thumbnailUrl: string,
 			datePublished: string,
@@ -93,13 +94,13 @@ export interface SearchWebReturnValue {
 				height: number
 			}
 		}[],
-        displayShoppingSourcesBadges: boolean,
-        displayRecipeSourcesBadges: boolean
-    },
-    news: {
-        id: string,
-        readLink: string,
-        value: {
+		displayShoppingSourcesBadges: boolean,
+		displayRecipeSourcesBadges: boolean
+	},
+	news: {
+		id: string,
+		readLink: string,
+		value: {
 			name: string,
 			url: string,
 			urlPingSuffix: string,
@@ -122,23 +123,23 @@ export interface SearchWebReturnValue {
 			datePublished: string,
 			category: string
 		}[]
-    },
-    relatedSearches: {
-        id: string,
-        value: {
+	},
+	relatedSearches: {
+		id: string,
+		value: {
 			text: string,
 			displayText: string,
 			webSearchUrl: string,
 			webSearchUrlPingSuffix: string
 		}[],
-    },
-    videos: {
-        id: string,
-        readLink: string,
-        webSearchUrl: string,
-        webSearchUrlPingSuffix: string,
-        isFamilyFriendly: boolean,
-        value: {
+	},
+	videos: {
+		id: string,
+		readLink: string,
+		webSearchUrl: string,
+		webSearchUrlPingSuffix: string,
+		isFamilyFriendly: boolean,
+		value: {
 			name: string,
 			description: string,
 			webSearchUrl: string,
@@ -165,6 +166,6 @@ export interface SearchWebReturnValue {
 				height: number
 			}
 		}[],
-        scenario: string
-    }
+		scenario: string
+	}
 }

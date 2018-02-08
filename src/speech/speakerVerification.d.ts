@@ -1,7 +1,7 @@
-import { ContentTypeHeaders } from "../index";
+import { ContentTypeHeaders, CommonConstructorOptions } from "../index";
 
 export class speakerVerification {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 	listAllSupportedVerificationPhrases(options: ListAllSupportedVerificationPhrasesOptions): Promise<ListAllSupportedVerificationPhrasesReturnValue[]>;
 	verify(options: SpeakerRecognitionVerificationOptions): Promise<SpeakerRecognitionVerificationReturnValue>;
 	createEnrollment(options: VerificationProfileCreateEnrollmentOptions): Promise<VerificationProfileCreateEnrollmentReturnValue>;

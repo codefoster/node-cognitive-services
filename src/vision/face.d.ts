@@ -1,7 +1,7 @@
 import { ContentTypeHeaders, CommonConstructorOptions } from "..";
 
 export class face {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 	detect(options: DetectOptions): Promise<DetectReturnValue>;
 	findSimilar(options: FindSimilarOptions): Promise<FindSimilarReturnValue>;
 	group(options: GroupOptions): Promise<GroupReturnValue>;

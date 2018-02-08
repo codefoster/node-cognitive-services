@@ -1,6 +1,8 @@
+import { CommonConstructorOptions } from "../index";
+
 export class bingImageSearch {
-	constructor(CommonConstructorOptions);
-	
+	constructor(options: CommonConstructorOptions);
+
 	/**
 	 * Returns insights about an image, such as webpages that include the image.
 	 */
@@ -10,7 +12,7 @@ export class bingImageSearch {
 	 * Get relevant images for a given query.
 	 */
 	search(options: SearchImageOptions): Promise<SearchImageReturnValue>;
-	
+
 	/**
 	 * Get currently trending images.
 	 */
@@ -41,27 +43,27 @@ export interface SearchImageOptions {
 }
 
 export interface SearchImageParameters {
-	
+
 	/**
 	 * The user's search query string
 	 */
 	q: string,
-	
+
 	/**
 	 * The number of video results to return in the response. The actual number delivered may be less than requested.
 	 */
 	count?: number,
-	
+
 	/**
 	 * The zero-based offset that indicates the number of video results to skip before returning results.
 	 */
 	offset?: number,
-	
+
 	/**
 	 * The market where the results come from. Typically, this is the country where the user is making the request from; however, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form -. For example, en-US.
 	 */
 	mkt?: string,
-	
+
 	/**
 	 * A filter used to filter results for adult content.
 	 */
@@ -70,15 +72,15 @@ export interface SearchImageParameters {
 
 export interface SearchImageReturnValue {
 	_type: string,
-    instrumentation: {
-        pingUrlBase: string,
-        pageLoadPingUrl: string
-    },
-    readLink: string,
-    webSearchUrl: string,
-    webSearchUrlPingSuffix: string,
-    totalEstimatedMatches: number,
-    value: {
+	instrumentation: {
+		pingUrlBase: string,
+		pageLoadPingUrl: string
+	},
+	readLink: string,
+	webSearchUrl: string,
+	webSearchUrlPingSuffix: string,
+	totalEstimatedMatches: number,
+	value: {
 		name: string,
 		webSearchUrl: string,
 		webSearchUrlPingSuffix: string,
@@ -104,7 +106,7 @@ export interface SearchImageReturnValue {
 		imageId: string,
 		accentColor: string
 	}[],
-    queryExpansions: {
+	queryExpansions: {
 		text: string,
 		displayText: string,
 		webSearchUrl: string,
@@ -114,8 +116,8 @@ export interface SearchImageReturnValue {
 			thumbnailUrl: string
 		}
 	}[],
-    nextOffsetAddCount: number,
-    pivotSuggestions: {
+	nextOffsetAddCount: number,
+	pivotSuggestions: {
 		pivot: string,
 		suggestions: {
 			text: string,
@@ -128,18 +130,18 @@ export interface SearchImageReturnValue {
 			}
 		}[]
 	}[],
-    displayShoppingSourcesBadges: boolean,
-    displayRecipeSourcesBadges: boolean
+	displayShoppingSourcesBadges: boolean,
+	displayRecipeSourcesBadges: boolean
 }
 
 export interface TrendingImageReturnValue {
 	_type: string,
-    instrumentation: {
-        pingUrlBase: string,
-        pageLoadPingUrl: string
-    },
-    categories: {
-        title: string,
+	instrumentation: {
+		pingUrlBase: string,
+		pageLoadPingUrl: string
+	},
+	categories: {
+		title: string,
 		tiles: {
 			query: {
 				text: string,
@@ -157,5 +159,5 @@ export interface TrendingImageReturnValue {
 				imageId: string
 			}
 		}[]
-    }[]
+	}[]
 }

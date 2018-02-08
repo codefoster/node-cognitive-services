@@ -1,3 +1,5 @@
+import { CommonConstructorOptions } from "../index";
+
 /**
  * Microsoft Translator APIs can be seamlessly integrated into your applications, websites, tools, or other solutions to provide multi-language user experiences. 
  * Leveraging industry standards, it can be used on any hardware platform and with any operating system to perform language translation and other language-related operations such as text language detection or text to speech
@@ -5,8 +7,8 @@
 
 export class textTranslator {
 
-	constructor(CommonConstructorOptions);
-	
+	constructor(options: CommonConstructorOptions);
+
 	/**
 	 * Adds a translation to the translation memory.
 	 */
@@ -16,25 +18,25 @@ export class textTranslator {
 	 * Adds an array of translations to add translation memory. This is an array version of AddTranslation. 
 	 */
 	addTranslationArray(options: AddTranslationArrayOptions): Promise<void>;
-	
+
 	/**
 	 * Breaks a piece of text into sentences and returns an array containing the lengths in each sentence.
 	 * The return value: An array of integers representing the lengths of the sentences. The length of the array is the number of sentences, and the values are the length of each sentence.
 	 */
 	breakSentences(options: BreakSentencesOptions): Promise<void>;
-	
+
 	/**
 	 * Use the Detect method to identify the language of a selected piece of text.
 	 * The return value: A string containing a two-character Language code for the given text.
 	 */
 	detect(options: DetectTextTranslatorOptions): Promise<void>;
-	
+
 	/**
 	 * Use the DetectArray method to identify the language of an array of string at once. 
 	 * Performs independent detection of each individual array element and returns a result for each row of the array.
 	 */
 	detectArray(options: DetectArrayOptions): Promise<DetectArrayReturnValue>;
-	
+
 	/**
 	 * Retrieves friendly names for the languages passed in as the parameter languageCodes, and localized using the passed locale language.
 	 */
@@ -45,13 +47,13 @@ export class textTranslator {
 	 * A return value: A string array containing the language codes supported for speech synthesis by the Translator Service.
 	 */
 	getLanguagesForSpeak(): Promise<void>;
-	
+
 	/**
 	 * Obtain a list of language codes representing languages that are supported by the Translation Service. 
 	 * Translate and TranslateArray can translate between any two of these languages.
 	 * A return value: A string array containing the language codes supported by the Translator Services.
 	 */
-	getLanguagesForTranslate(): Promise <void>;
+	getLanguagesForTranslate(): Promise<void>;
 
 	/**
 	 * Retrieves an array of translations for a given language pair from the store and the MT engine. 
@@ -63,17 +65,17 @@ export class textTranslator {
 	 * Retrieve multiple translation candidates for multiple source texts.
 	 */
 	getTranslationsArray(options: GetTranslationsArrayOptions): Promise<GetTranslationsArrayReturnValue>;
-	
+
 	/**
 	 * Returns a wave or mp3 stream of the passed-in text being spoken in the desired language.
 	 */
 	speak(options: SpeakOptions): Promise<void>;
-	
+
 	/**
 	 * Translates a text string from one language to another.
 	 */
 	translate(options: TranslateOptions): Promise<void>;
-	
+
 	/**
 	 * Use the TranslateArray method to retrieve translations for multiple source texts.
 	 */
@@ -85,7 +87,7 @@ export interface AddTranslationOptions {
 }
 
 export interface AddTranslationParameters {
-	
+
 	/**
 	 * A string containing the text to translate from. 
 	 * The string has a maximum length of 1000 characters.
@@ -124,7 +126,7 @@ export interface AddTranslationParameters {
 	/**
 	 * A string containing the category (domain) of the translation. Defaults to "general".
 	 */
-	category?: string, 
+	category?: string,
 
 	/**
 	 *  A string used to track the originator of the submission.
@@ -143,13 +145,13 @@ export interface AddTranslationArrayOptions {
 
 
 export interface AddTranslationArrayBody {
-	
+
 	/**
 	 * A string containing the language code of the source language. 
 	 * Must be one of the languages returned by theGetLanguagesForTranslate method.
 	 */
 	from: string,
-	
+
 	/**
 	 * A string containing the language code of the target language. 
 	 * Must be one of the languages returned by the GetLanguagesForTranslate method.
@@ -162,7 +164,7 @@ export interface AddTranslationArrayBody {
 	 * The maximum number of array elements is 100.
 	 */
 
-	Translations:{
+	Translations: {
 		OriginalText: string,
 		Rating: number,
 		Sequence: number,
@@ -203,7 +205,7 @@ export interface DetectTextTranslatorOptions {
 }
 
 export interface DetectTextTranslatorParameters {
-	
+
 	/**
 	 * A string representing the text to split into sentences. 
 	 * The size of the text must not exceed 10000 characters.
@@ -220,7 +222,7 @@ export interface DetectArrayOptions {
 
 export interface DetectArrayBody {
 	ArrayOfstring: {
-		string: string []
+		string: string[]
 	}
 }
 
@@ -239,7 +241,7 @@ export interface GetLanguageNamesOptions {
 }
 
 export interface GetLanguageNamesParameters {
-	
+
 	/**
 	 * A string representing a combination of an ISO 639 two-letter lowercase culture code associated with 
 	 * a language and an ISO 3166 two-letter uppercase subculture code to localize the language names or a ISO 639 lowercase culture code by itself.
@@ -250,7 +252,7 @@ export interface GetLanguageNamesParameters {
 	 * A string array representing the ISO 639-1 language codes to retrieve the friendly name for.
 	 */
 	languageCodes: {
-		string:string[]
+		string: string[]
 	}
 }
 
@@ -265,7 +267,7 @@ export interface GetTranslationsOptions {
 }
 
 export interface GetTranslationsParameters {
-	
+
 	/**
 	 * A string representing the text to translate. 
 	 * The size of the text must not exceed 10000 characters.
@@ -295,12 +297,12 @@ export interface GetTranslationsParameters {
 		 * A string containing the category (domain) of the translation. Defaults to "general".
 		 */
 		category?: string,
-		
+
 		/**
 		 * The only supported, and the default, option is "text/plain".
 		 */
 		contentType?: "text/plain",
-		
+
 		/**
 		 * boolean flag to determine whether more than one alternatives should be returned from the MT engine. 
 		 * Valid values are true and false (case-sensitive). Default is false and includes only 1 alternative. 
@@ -308,8 +310,8 @@ export interface GetTranslationsParameters {
 		 * The feature allows for returning alternatives for sentences that have no alternatives in CTF, by adding artificial alternatives from the n-best list of the decoder.
 		 */
 		includeMultipleMTAlternatives: boolean,
-		
-	
+
+
 		/**
 		 * User state to help correlate request and response. The same contents will be returned in the response.
 		 */
@@ -337,31 +339,31 @@ export interface GetTranslationsReturnValue {
 		 * If the method did not specify a From language, this will be the result of auto language detection. 
 		 * Otherwise it will be the given From language.
 		 */
-		from: string, 
-		
+		from: string,
+
 		/**
 		 * User state to help correlate request and response. Contains the same value as given in the TranslateOptions parameter.
 		 */
-		state: string, 
+		state: string,
 
 		translationMatch: {
 			/**
 			 * If an error has occurred for a specific input string, the error code is stored. Otherwise the field is empty.
 			 */
-			error: string, 
+			error: string,
 
 			/**
 			 * The system matches input sentences against the store, including inexact matches.  MatchDegree indicates how closely the input text matches the original text found in the store. 
 			 * The value returned ranges from 0 to 100, where 0 is no similarity and 100 is an exact case sensitive match.
 			 */
-			matchDegree: number, 
-			
+			matchDegree: number,
+
 			/**
 			 * Original text that was matched for this result. Only returned if the matched original text was different than the input text. 
 			 * Used to return the source text of a fuzzy match. Not returned for Microsoft Translator results.
 			 */
-			matchedOriginalText: string, 
-			
+			matchedOriginalText: string,
+
 			/**
 			 * Indicates the authority of the person making the quality decision. 
 			 * Machine Translation results will have a rating of 5. Anonymously provided translations will generally have a rating of 1 to 4, whilst authoritatively provided translations will generally have a rating of 6 to 10.
@@ -406,14 +408,14 @@ export interface GetTranslationsArrayBody {
 		 * A string containing the category (domain) of the translation. Defaults to general.
 		 */
 		category?: string,
-			
+
 		/**
 		 * lag to determine whether more than one alternatives should be returned from the MT engine. Valid values are true and false (case-sensitive). Default is false and includes only 1 alternative. 
 		 * Setting the flag to true allows for generating artificial alternatives in translation, fully integrated with the collaborative translations framework (CTF). 
 		 * The feature allows for returning alternatives for sentences that have no alternatives in CTF, by adding artificial alternatives from the n-best list of the decoder.
 		 */
 		includeMultipleMTAlternatives?: boolean,
-			
+
 		/**
 		 * User state to help correlate request and response. The same contents will be returned in the response.
 		 */
@@ -434,7 +436,7 @@ export interface GetTranslationsArrayBody {
 	 * The total of all texts to be translated must not exceed 10000 characters. The maximum number of array elements is 10.
 	 */
 	texts: {
-	  string: string[]
+		string: string[]
 	},
 
 	/**
@@ -453,31 +455,31 @@ export interface GetTranslationsArrayReturnValue {
 		 * If the method did not specify a From language, this will be the result of auto language detection. 
 		 * Otherwise it will be the given From language.
 		 */
-		from: string, 
-		
+		from: string,
+
 		/**
 		 * User state to help correlate request and response. Contains the same value as given in the TranslateOptions parameter.
 		 */
-		state: string, 
+		state: string,
 
 		translationMatch: {
 			/**
 			 * If an error has occurred for a specific input string, the error code is stored. Otherwise the field is empty.
 			 */
-			error: string, 
+			error: string,
 
 			/**
 			 * The system matches input sentences against the store, including inexact matches.  MatchDegree indicates how closely the input text matches the original text found in the store. 
 			 * The value returned ranges from 0 to 100, where 0 is no similarity and 100 is an exact case sensitive match.
 			 */
-			matchDegree: number, 
-			
+			matchDegree: number,
+
 			/**
 			 * Original text that was matched for this result. Only returned if the matched original text was different than the input text. 
 			 * Used to return the source text of a fuzzy match. Not returned for Microsoft Translator results.
 			 */
-			matchedOriginalText: string, 
-			
+			matchedOriginalText: string,
+
 			/**
 			 * Indicates the authority of the person making the quality decision. 
 			 * Machine Translation results will have a rating of 5. Anonymously provided translations will generally have a rating of 1 to 4, whilst authoritatively provided translations will generally have a rating of 6 to 10.
@@ -503,7 +505,7 @@ export interface SpeakOptions {
 }
 
 export interface SpeakParameters {
-	
+
 	/**
 	 * A string containing a sentence or sentences of the specified language to be spoken for the wave stream. 
 	 * The size of the text to speak must not exceed 2000 characters.
@@ -534,7 +536,7 @@ export interface TranslateOptions {
 }
 
 export interface TranslateParameters {
-	
+
 	/**
 	 * A string containing a sentence or sentences of the specified language to be spoken for the wave stream. 
 	 * The size of the text to speak must not exceed 2000 characters.
@@ -544,7 +546,7 @@ export interface TranslateParameters {
 	/**
 	 * A string representing the language code of the translation text. For example, en for English.
 	 */
-	from?: string, 
+	from?: string,
 
 	/**
 	 * A string representing the language code to translate the text into.
@@ -559,7 +561,7 @@ export interface TranslateParameters {
 	/**
 	 * The only supported, and the default, option is text/plain.
 	 */
-	contentType?: "text/plain"	
+	contentType?: "text/plain"
 }
 
 export interface TranslateArrayOptions {
@@ -591,13 +593,13 @@ export interface TranslateArrayBody {
 		 * Specifies how profanities are handled as explained above. 
 		 * Accepted values of ProfanityAction are NoAction (default), Marked and Deleted. 
 		 */
-		profanityAction?: string, 
+		profanityAction?: string,
 
 		/**
 		 * The only supported, and the default, option is text/plain.
 		 */
 		contentType?: string,
-			
+
 		/**
 		 * User state to help correlate request and response. The same contents will be returned in the response.
 		 */
@@ -636,19 +638,19 @@ export interface TranslateArrayReturnValue {
 			 * An array of integers indicating the length of each sentence in the original source text.
 			 * The length of the array indicates the number of sentences.
 			 */
-			originalSentenceLengths: number [],
-			
+			originalSentenceLengths: number[],
+
 			/**
 			 * The translated text.
 			 */
 			translatedText: string,
-			
+
 			/**
 			 * An array of integers indicating the length of each sentence in the translated text. 
 			 * The length of the array indicates the number of sentences.
 			 */
-			translatedSentenceLengths: number [],
-			
+			translatedSentenceLengths: number[],
+
 			/**
 			 * User state to help correlate request and response. Returns the same content as in the request.
 			 */

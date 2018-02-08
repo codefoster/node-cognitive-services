@@ -1,7 +1,7 @@
 import { ContentTypeHeaders, CommonConstructorOptions } from "..";
 
 export class computerVision {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 	analyzeImage(options: AnalyzeImageOptions): Promise<AnalyzeImageReturnValue>;
 	describeImage(options: DescribeImageOptions): Promise<DescribeImageReturnValue>;
 	getHandwrittenTextOperationResult(options: GetHandwrittenTextOperationResultOptions): Promise<GetHandwrittenTextOperationResultReturnValue>;
@@ -263,7 +263,7 @@ export interface TagImageOptions {
 
 export interface TagImageReturnValue {
 	tags: { name: string, confidence: number }[],
-	requestId	: string,
+	requestId: string,
 	metadata: { width: number, height: number, format: string }
 }
 //# endregion

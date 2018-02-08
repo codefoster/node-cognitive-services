@@ -1,7 +1,7 @@
-import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
+import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders, CommonConstructorOptions } from "../index";
 
 export class qnaMaker {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 
 	/**
 	 * Creates a new knowledge base.
