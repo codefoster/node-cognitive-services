@@ -1,4 +1,4 @@
-import { ContentTypeHeaders } from "../index";
+import { ContentTypeHeaders, CommonConstructorOptions } from "../index";
 
 
 /**
@@ -8,7 +8,7 @@ import { ContentTypeHeaders } from "../index";
  * This API uses advanced natural language processing techniques to deliver best in class predictions.
  */
 export class textAnalytics {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 
 	/**
 	 * The API returns the detected language and a numeric score between 0 and 1. 
@@ -16,13 +16,13 @@ export class textAnalytics {
 	 * A total of 120 languages are supported.
 	 */
 	detectLanguage(options: DetectLanguageOptions): Promise<DetectLanguageReturnValue>;
-	
+
 	/**
 	 * The API returns a list of strings denoting the key talking points in the input text. 
 	 * We employ techniques from Microsoft Office's sophisticated Natural Language Processing toolkit.
 	 */
 	keyPhrases(options: KeyPhrasesOptions): Promise<KeyPhrasesReturnValue>;
-	
+
 	/**
 	 *  The API returns a numeric score between 0 and 1. 
 	 * Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment. 
@@ -38,20 +38,20 @@ export interface DetectLanguageOptions {
 
 export interface DetectLanguageBody {
 	documents: {
-		  id: string,
-		  text: string
-		}[]
+		id: string,
+		text: string
+	}[]
 }
 
 export interface DetectLanguageReturnValue {
 	documents: {
-		  id: string,
-		  detectedLanguages: {
-			  name: string,
-			  iso6391Name: string,
-			  score: number
-			}[]
+		id: string,
+		detectedLanguages: {
+			name: string,
+			iso6391Name: string,
+			score: number
 		}[]
+	}[]
 }
 
 export interface KeyPhrasesOptions {
@@ -64,7 +64,7 @@ export interface KeyPhrasesBody {
 		language: string,
 		id: string,
 		text: string
-	  }[]
+	}[]
 }
 
 export interface KeyPhrasesReturnValue {
@@ -90,6 +90,6 @@ export interface SentimentBody {
 export interface SentimentReturnValue {
 	documents: {
 		score: number,
-		  id: string
-		}[]
+		id: string
+	}[]
 }

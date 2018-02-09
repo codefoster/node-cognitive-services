@@ -1,3 +1,5 @@
+import { CommonConstructorOptions } from "../index";
+
 /**
  * The Video API lets partners send a search query to Bing and get back a list of relevant videos. 
  * Note you should call the Video API if you need video content only. 
@@ -5,7 +7,7 @@
  * You must display the videos in the order provided in the response.
  */
 export class bingVideoSearch {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 
 	/**
 	 * Get videos relevant for a given query.

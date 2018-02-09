@@ -1,4 +1,4 @@
-import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
+import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders, CommonConstructorOptions } from "../index";
 
 /**
  * The Recommendations API identifies consumption patterns from your transaction information in order to provide recommendations. 
@@ -7,7 +7,7 @@ import { OcpApimSubscriptionKeyHeaders, ContentTypeHeaders } from "../index";
  */
 export class recommendations {
 
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 
 	/**
 	 * Cancels an ongoing operation. One example is to cancel a build request that was submitted.
@@ -102,28 +102,28 @@ export interface CreateBusinessRuleParameters {
 export interface CreateBusinessRuleBody {
 	type: string,
 	parameters: {
-	  blockList: {
-		itemIds: string []
-	  },
-	  whiteList: {
-		itemIds: string []
-	  },
-	  upsale: {
-		itemIds: string [],
-		numberOfItemsToUpsale: number
-	  },
-	  perSeedBlockList: {
-		seedItemIds: string [],
-		itemIds: string []
-	  },
-	  featureBlockList: {
-		name: string,
-		values: string []
-	  },
-	  featureWhiteList: {
-		name: string,
-		values: string []
-	  }
+		blockList: {
+			itemIds: string[]
+		},
+		whiteList: {
+			itemIds: string[]
+		},
+		upsale: {
+			itemIds: string[],
+			numberOfItemsToUpsale: number
+		},
+		perSeedBlockList: {
+			seedItemIds: string[],
+			itemIds: string[]
+		},
+		featureBlockList: {
+			name: string,
+			values: string[]
+		},
+		featureWhiteList: {
+			name: string,
+			values: string[]
+		}
 	}
 }
 
@@ -131,28 +131,28 @@ export interface CreateBusinessRuleReturnValue {
 	id: number,
 	type: string,
 	parameters: {
-	  blockList: {
-		itemIds: string []
-	  },
-	  whiteList: {
-		itemIds: string []
-	  },
-	  upsale: {
-		itemIds: string [],
-		numberOfItemsToUpsale: number
-	  },
-	  perSeedBlockList: {
-		seedItemIds: string [],
-		itemIds: string []
-	  },
-	  featureBlockList: {
-		name: string,
-		values: string []
-	  },
-	  featureWhiteList: {
-		name: string,
-		values: string []
-	  }
+		blockList: {
+			itemIds: string[]
+		},
+		whiteList: {
+			itemIds: string[]
+		},
+		upsale: {
+			itemIds: string[],
+			numberOfItemsToUpsale: number
+		},
+		perSeedBlockList: {
+			seedItemIds: string[],
+			itemIds: string[]
+		},
+		featureBlockList: {
+			name: string,
+			values: string[]
+		},
+		featureWhiteList: {
+			name: string,
+			values: string[]
+		}
 	}
 }
 
@@ -179,7 +179,7 @@ export interface CreateAModelReturnValue {
 export interface CreateOrTriggerABuildOptions {
 	parameters: CreateOrTriggerABuildParameters,
 	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
-	body:CreateOrTriggerABuildeBody
+	body: CreateOrTriggerABuildeBody
 }
 
 export interface CreateOrTriggerABuildParameters {
@@ -193,75 +193,75 @@ export interface CreateOrTriggerABuildeBody {
 	description: string,
 	buildType: string,
 	buildParameters: {
-	  ranking: {
-		numberOfModelIterations: number,
-		numberOfModelDimensions: number,
-		itemCutOffLowerBound: number,
-		itemCutOffUpperBound: number,
-		userCutOffLowerBound: number,
-		userCutOffUpperBound: number
-	  },
-	  recommendation: {
-		numberOfModelIterations: number,
-		numberOfModelDimensions: number,
-		itemCutOffLowerBound: number,
-		itemCutOffUpperBound: number,
-		userCutOffLowerBound: number,
-		userCutOffUpperBound: number,
-		enableModelingInsights: true,
-		splitterStrategy: string,
-		randomSplitterParameters: {
-		  testPercent: number,
-		  randomSeed: number
+		ranking: {
+			numberOfModelIterations: number,
+			numberOfModelDimensions: number,
+			itemCutOffLowerBound: number,
+			itemCutOffUpperBound: number,
+			userCutOffLowerBound: number,
+			userCutOffUpperBound: number
 		},
-		dateSplitterParameters: {
-		  splitDate: string
+		recommendation: {
+			numberOfModelIterations: number,
+			numberOfModelDimensions: number,
+			itemCutOffLowerBound: number,
+			itemCutOffUpperBound: number,
+			userCutOffLowerBound: number,
+			userCutOffUpperBound: number,
+			enableModelingInsights: true,
+			splitterStrategy: string,
+			randomSplitterParameters: {
+				testPercent: number,
+				randomSeed: number
+			},
+			dateSplitterParameters: {
+				splitDate: string
+			},
+			popularItemBenchmarkWindow: number,
+			useFeaturesInModel: boolean,
+			modelingFeatureList: string,
+			allowColdItemPlacement: boolean,
+			enableFeatureCorrelation: boolean,
+			reasoningFeatureList: string,
+			enableU2I: boolean
 		},
-		popularItemBenchmarkWindow: number,
-		useFeaturesInModel: boolean,
-		modelingFeatureList: string,
-		allowColdItemPlacement: boolean,
-		enableFeatureCorrelation: boolean,
-		reasoningFeatureList: string,
-		enableU2I: boolean
-	  },
-	  fbt: {
-		supportThreshold: number,
-		maxItemSetSize: number,
-		minimalScore: string,
-		similarityFunction: string,
-		enableModelingInsights: boolean,
-		splitterStrategy: string,
-		randomSplitterParameters: {
-		  testPercent: number,
-		  randomSeed: number
+		fbt: {
+			supportThreshold: number,
+			maxItemSetSize: number,
+			minimalScore: string,
+			similarityFunction: string,
+			enableModelingInsights: boolean,
+			splitterStrategy: string,
+			randomSplitterParameters: {
+				testPercent: number,
+				randomSeed: number
+			},
+			dateSplitterParameters: {
+				splitDate: string
+			},
+			popularItemBenchmarkWindow: number
 		},
-		dateSplitterParameters: {
-		  splitDate: string
-		},
-		popularItemBenchmarkWindow: number
-	  },
-	  sar: {
-		supportThreshold: 0,
-		cooccurrenceUnit: string,
-		similarityFunction: string,
-		enableColdItemPlacement: boolean,
-		enableColdToColdRecommendations: boolean,
-		enableModelingInsights: boolean,
-		enableU2I: true,
-		splitterStrategy: string,
-		randomSplitterParameters: {
-		  testPercent: number,
-		  randomSeed: number
-		},
-		dateSplitterParameters: {
-		  splitDate: string
-		},
-		popularItemBenchmarkWindow: number,
-		enableUserAffinity: boolean,
-		allowSeedItemsInRecommendations: boolean,
-		enableBackfilling: boolean
-	  }
+		sar: {
+			supportThreshold: 0,
+			cooccurrenceUnit: string,
+			similarityFunction: string,
+			enableColdItemPlacement: boolean,
+			enableColdToColdRecommendations: boolean,
+			enableModelingInsights: boolean,
+			enableU2I: true,
+			splitterStrategy: string,
+			randomSplitterParameters: {
+				testPercent: number,
+				randomSeed: number
+			},
+			dateSplitterParameters: {
+				splitDate: string
+			},
+			popularItemBenchmarkWindow: number,
+			enableUserAffinity: boolean,
+			allowSeedItemsInRecommendations: boolean,
+			enableBackfilling: boolean
+		}
 	}
 }
 

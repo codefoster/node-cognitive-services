@@ -1,11 +1,15 @@
 import { ContentTypeHeaders, CommonConstructorOptions, OcpApimSubscriptionKeyHeaders } from "..";
 
 export class face {
+<<<<<<< HEAD
 	constructor(options:CommonConstructorOptions);
 	
 	/**
 	 * Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.
 	 */
+=======
+	constructor(options: CommonConstructorOptions);
+>>>>>>> master
 	detect(options: DetectOptions): Promise<DetectReturnValue>;
 
 	/**

@@ -1,6 +1,8 @@
+import { CommonConstructorOptions } from "../index";
+
 export class bingAutosuggest {
-	constructor(CommonConstructorOptions);
-	
+	constructor(options: CommonConstructorOptions);
+
 	/**
 	 * This operation provides suggestions for a given query or partial query.
 	 */
@@ -21,14 +23,14 @@ export interface SuggestionsParameters {
 
 export interface SuggestionsReturnValue {
 	_type: string,
-    instrumentation: {
-        pingUrlBase: string,
-        pageLoadPingUrl: string
-    },
-    queryContext: {
-        originalQuery: string
-    },
-    suggestionGroups: {
+	instrumentation: {
+		pingUrlBase: string,
+		pageLoadPingUrl: string
+	},
+	queryContext: {
+		originalQuery: string
+	},
+	suggestionGroups: {
 		name: string,
 		searchSuggestions: {
 			url: string,
@@ -37,7 +39,7 @@ export interface SuggestionsReturnValue {
 			query: string,
 			searchKind: string
 		}[]
-    }[]
+	}[]
 }
 
 

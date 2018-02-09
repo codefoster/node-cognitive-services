@@ -1,7 +1,7 @@
-import { ContentTypeHeaders } from "../index";
+import { ContentTypeHeaders, CommonConstructorOptions } from "../index";
 
 export class speakerIdentification {
-	constructor(CommonConstructorOptions);
+	constructor(options: CommonConstructorOptions);
 	createEnrollment(options: IdentificationProfileCreateEnrollmentOptions): Promise <void>;
 	createProfile(options: IdentificationProfileCreateProfileOptions): Promise<IdentificationProfileCreateProfileReturnValue>;
 	deleteProfile(options: IdentificationProfileDeleteProfileOptions): Promise<void>;
