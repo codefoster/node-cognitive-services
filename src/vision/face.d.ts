@@ -1,32 +1,139 @@
-import { ContentTypeHeaders, CommonConstructorOptions } from "..";
+import { ContentTypeHeaders, CommonConstructorOptions, OcpApimSubscriptionKeyHeaders } from "..";
 
 export class face {
+<<<<<<< HEAD
+	constructor(options:CommonConstructorOptions);
+	
+	/**
+	 * Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.
+	 */
+=======
 	constructor(options: CommonConstructorOptions);
+>>>>>>> master
 	detect(options: DetectOptions): Promise<DetectReturnValue>;
+
+	/**
+	 * Given query face's faceId, to search the similar-looking faces from a faceId array or a faceListId. 
+	 * faceId array contains the faces created by Face - Detect, which will expire 24 hours after creation. 
+	 * While "faceListId" is created by Face List - Create a Face List containing persistedFaceIds that will not expire. 
+	 * Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.
+	 * 
+	 * Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. 
+	 * It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. 
+	 * "matchFace" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.
+	 */
 	findSimilar(options: FindSimilarOptions): Promise<FindSimilarReturnValue>;
+	
+	/**
+	 * Divide candidate faces into groups based on face similarity. 
+	 * 
+	 * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.
+	 * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.
+	 * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.
+	 */
 	group(options: GroupOptions): Promise<GroupReturnValue>;
+	
+	/**
+	 * For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId), and returns candidate person(s) for that face ranked by similarity confidence. 
+	 * The person group should be trained to make it ready for identification
+	 */
 	identify(options: IdentifyOptions): Promise<IdentifyReturnValue>;
+	
+	/**
+	 * Verify whether two faces belong to a same person or whether one face belongs to a person. 
+	 */
 	verify(options: VerifyOptions): Promise<VerifyReturnValue>;
+	
+	/**
+	 * Add a face to a face list. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face, and persistedFaceId will not expire.
+	 */
 	addAFaceToAFaceList(options: AddAFaceToAFaceListOptions): Promise<AddAFaceToAFaceListReturnValue>;
-	createAFaceList(options: any): any;
-	deleteAFaceFromAFaceList(options: any): any;
-	deleteAFaceList(options: any): any;
+	
+	/**
+	 * Create an empty face list with user-specified faceListId, name and an optional userData. Up to 64 face lists are allowed to exist in one subscription.
+	 * Face list is a group of faces, and these faces will not expire. Face list is used as a parameter of source faces in Face - Find Similar. 
+	 * Face List is useful when to find similar faces in a fixed face set very often, e.g. to find a similar face in a face list of celebrities, friends, or family members.
+	 * 
+	 * A face list can have a maximum of 1000 faces.
+	 */
+	createAFaceList(options: CreateAFaceListOptions): Promise<any>;
+	
+	/**
+	 * Delete an existing face from a face list (given by a persisitedFaceId and a faceListId). Persisted image related to the face will also be deleted.
+	 * Concurrency is supported in adding or deleting faces against different face lists. Operations on a same face list will be processed sequentially.
+	 */
+	deleteAFaceFromAFaceList(options: DeleteAFaceFromAFaceListOptions): Promise<any>;
+	
+	/**
+	 * Delete an existing face list according to faceListId. Persisted face images in the face list will also be deleted.
+	 */
+	deleteAFaceList(options: DeleteAFaceListOptions): Promise<any>;
+
+	/**
+	 * Retrieve a face list's information, including faceListId, name, userData and faces in the face list. Face list simply represents a list of faces, and could be treated as a searchable data source in Face - Find Similar.
+	 */
 	getAFaceList(options: GetAFaceListOptions): Promise<GetAFaceListReturnValue>;
+	
+	/**
+	 * Retrieve information about all existing face lists. Only faceListId, name and userData will be returned. Try Face List - Get a Face List to retrieve face information inside faceList.
+	 */
 	listFaceLists(): ListFaceListsReturnValue;
+
+	/**
+	 * Update information of a face list, including name and userData. Face List simply represents a list of persisted faces, and could be treated as a searchable data source in Face - Find Similar.
+	 */
 	updateAFaceList(options: UpdateAFaceListOptions): Promise<void>;
-	addAPersonFace(options: any): any;
-	createAPerson(options: any): any;
-	deleteAPerson(options: any): any;
-	deleteAPersonFace(options: any): any;
+
+	/**
+	 * Add a representative face to a person for identification. The input face is specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face and this persistedFaceId will not expire. Note persistedFaceId is different from faceId which represents the detected face by Face - Detect.
+	 * 
+	 * The persistedFaceId of person is used in Person - Delete a Person Face to remove a face from a person.
+	 * Each person has a maximum of 248 faces.
+	 * JPEG, PNG, GIF(the first frame), and BMP are supported. The image file size should be larger than or equal to 1KB but no larger than 4MB.
+	 * The detectable face size is between 36x36 to 4096x4096 pixels. The faces out of this range will not be detected.
+	 * Rectangle specified by targetFace should contain exactly one face. Zero or multiple faces will be regarded as an error. Out of detectable face size, large head-pose, or very large occlusions will also result in fail to add a person face.
+	 * The given rectangle specifies both face location and face size at the same time. There is no guarantee of correct result if you are using rectangle which is not returned from Face - Detect.
+	 * 
+	 * Concurrency is supported in adding or deleting faces against different persons. Operations on a same person will be processed sequentially.
+	 */
+	addAPersonFace(options: AddAPersonFaceOptions): Promise<AddAPersonFaceReturnValue>;
+	
+	/**
+	 * Create a new person in a specified person group. A newly created person have no registered face, you can call Person - Add a Person Face API to add faces to the person. 
+	 * 
+	 * The number of persons has a subscription level limit and a person group level limit. Free tier subscriptions have a limit of 1,000 persons per Person Group and 1,000 persons total per subscription. 
+	 * The S0 tier subscriptions have these limits: 10,000 Persons per Person Group, 100M Persons total and 1M Person Groups per subscription.
+	 */
+	createAPerson(options: CreateAPersonOptions): Promise<CreateAPersonReturnValue>;
+
+	/**
+	 * Delete an existing person from a person group. Persisted face images of the person will also be deleted.
+	 */
+	deleteAPerson(options: DeleteAPersonOptions): Promise<any>;
+
+	/**
+	 * 
+	 */
+	deleteAPersonFace(options: DeleteAPersonFaceOptions): any;
+	
+	
 	getAPerson(options: GetAPersonOptions): Promise<GetAPersonReturnValue>;
+	
+	
 	getAPersonFace(options: GetAPersonFaceOptions): Promise<GetAPersonFaceReturnValue>;
+	
+	
 	listPersonsInAPersonGroup(options: any): any;
 	updateAPerson(options: any): any;
 	updateAPersonFace(options: any): any;
 	createAPersonGroup(options: any): any;
+	
+	
 	deleteAPersonGroup(options: DeleteAPersonGroupOptions): any;
 	getAPersonGroup(options: GetAPersonGroupOptions): Promise<GetAPersonGroupReturnValue>;
 	getPersonGroupTrainingStatus(options: GetPersonGroupTrainingStatusOptions): Promise<GetPersonGroupTrainingStatusReturnValue>;
+	
+	
 	listPersonGroups(options: any): any;
 	trainPersonGroup(options: any): any;
 	updateAPersonGroup(options: any): any;
@@ -407,15 +514,8 @@ export interface AddAFaceToAFaceListReturnValue {
 
 //#region getAFaceList
 export interface GetAFaceListOptions {
-	headers?: GetAFaceListHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: GetAFaceListParameters
-}
-
-export interface GetAFaceListHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your Cognitive Services accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key"?: string
 }
 
 export interface GetAFaceListParameters {
@@ -450,14 +550,6 @@ export interface GetAFaceListReturnValue {
 	}[]
 }
 //#endregion
-
-//#region listFaceLists
-export interface ListFaceListsHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your Cognitive Services accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key ": string
-}
 
 export interface ListFaceListsReturnValue {
 	faceLists: {
@@ -520,15 +612,8 @@ export interface UpdateAFaceListBody {
 
 //#region getAPerson
 export interface GetAPersonOptions {
-	headers?: GetAPersonHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: GetAPersonParameters
-}
-
-export interface GetAPersonHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your Cognitive Services accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface GetAPersonParameters {
@@ -568,12 +653,8 @@ export interface GetAPersonReturnValue {
 
 //#region getAPersonFace
 export interface GetAPersonFaceOptions {
-	headers?: GetAPersonFaceHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: GetAPersonFaceParameters
-}
-
-export interface GetAPersonFaceHeaders {
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface GetAPersonFaceParameters {
@@ -619,17 +700,9 @@ export interface GetAPersonFaceReturnValue {
 
 //#region deleteAPersonGroup
 export interface DeleteAPersonGroupOptions {
-	headers?: DeleteAPersonGroupHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: DeleteAPersonGroupParameters
 }
-
-export interface DeleteAPersonGroupHeaders {
-	/**
-	 * Subscription key which provides access to this API. Found in your Cognitive Services accounts. 
-	 */
-	"Ocp-Apim-Subscription-Key": string
-}
-
 
 export interface DeleteAPersonGroupParameters {
 	/**
@@ -641,12 +714,8 @@ export interface DeleteAPersonGroupParameters {
 
 //#region getAPersonGroup
 export interface GetAPersonGroupOptions {
-	headers?: GetAPersonGroupHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: GetAPersonGroupParameters
-}
-
-export interface GetAPersonGroupHeaders {
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface GetAPersonGroupParameters {
@@ -676,12 +745,8 @@ export interface GetAPersonGroupReturnValue {
 
 //#region getPersonGroupTrainingStatus
 export interface GetPersonGroupTrainingStatusOptions {
-	headers?: GetPersonGroupTrainingStatusHeaders,
+	headers?: OcpApimSubscriptionKeyHeaders,
 	parameters?: GetPersonGroupTrainingStatusParameters
-}
-
-export interface GetPersonGroupTrainingStatusHeaders {
-	"Ocp-Apim-Subscription-Key": string
 }
 
 export interface GetPersonGroupTrainingStatusParameters {
@@ -714,12 +779,138 @@ export interface GetPersonGroupTrainingStatusReturnValue {
 }
 //#endregion
 
-//#region listPersonGroups
-//#endregion
+export interface CreateAFaceListOptions {
+	parameters: CreateAFaceListParameters,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
 
-//#region trainPersonGroup
-//#endregion
+export interface CreateAFaceListParameters {
 
-//#region updateAPersonGroup
-//#endregion
+	/**
+	 * Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.
+	 */
+	faceListId: string,
 
+	/**
+	 * Name of the created face list, maximum length is 128.
+	 */
+	name: String,	
+	
+	/**
+	 * Optional user defined data for the face list. Length should not exceed 16KB.
+	 */
+	userData?: String
+}
+
+export interface DeleteAFaceFromAFaceListOptions {
+	parameters: DeleteAFaceFromAFaceListParameters,
+	headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface DeleteAFaceFromAFaceListParameters {
+	/**
+	 * faceListId of an existing face list. Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.
+	 */
+	faceListId: string,
+	
+	/**
+	 * persistedFaceId of an existing face. Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.
+	 */
+	persistedFaceId: string
+}
+
+export interface DeleteAFaceListOptions {
+	parameters: DeleteAFaceListParameters,
+	Headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface DeleteAFaceListParameters {
+	/**
+	 * faceListId of an existing face list. Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.
+	 */
+	faceListId: string
+}
+
+export interface AddAPersonFaceOptions {
+	parameters: AddAPersonFaceParameters,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
+
+export interface AddAPersonFaceParameters {
+	
+	/**
+	 * Specifying the person group containing the target person.
+	 */
+	personGroupId: String,
+
+	/**
+	 * Target person that the face is added to.
+	 */
+	personId: String,
+
+	/**
+	 * User-specified data about the target face to add for any purpose. The maximum length is 1KB.
+	 */
+	userData?: String,
+
+	/**
+	 * A face rectangle to specify the target face to be added to a person, in the format of "targetFace=left,top,width,height". E.g. "targetFace=10,10,100,100". If there is more than one face in the image, targetFace is required to specify which face to add. No targetFace means there is only one face detected in the entire image.
+	 */
+	targetFace?: String
+}
+
+export interface AddAPersonFaceReturnValue {
+	
+	/**
+	 * persistedFaceId of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call.
+	 */
+	"persistedFaceId": String
+}
+
+export interface CreateAPersonOptions {
+	parameters: CreateAPersonParameters,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
+
+export interface CreateAPersonParameters {
+	/**
+	 * personGroupId of the target person group, created by Person Group - Create a Person Group.
+	 */
+	personGroupId: string,
+
+	/**
+	 * Display name of the target person. The maximum length is 128.
+	 */
+	"name": String,	
+	
+	/**
+	 * Optional fields for user-provided data attached to a person. Size limit is 16KB.
+	 */
+	"userData"?: String	
+}
+
+export interface CreateAPersonReturnValue {
+	
+	/**
+	 * personID of the new created person.
+	 */
+	"personId":	String
+}
+
+export interface DeleteAPersonOptions {
+	parameters: DeleteAPersonParameters,
+	headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface DeleteAPersonParameters {
+	
+	/**
+	 * Specifying the person group containing the person.
+	 */
+	personGroupId: String,
+
+	/**
+	 * The target personId to delete.
+	 */
+	personId: String
+}
