@@ -1,15 +1,10 @@
 import { ContentTypeHeaders, CommonConstructorOptions, OcpApimSubscriptionKeyHeaders } from "..";
 
 export class face {
-<<<<<<< HEAD
-	constructor(options:CommonConstructorOptions);
-	
 	/**
 	 * Detect human faces in an image and returns face locations, and optionally with faceIds, landmarks, and attributes.
 	 */
-=======
 	constructor(options: CommonConstructorOptions);
->>>>>>> master
 	detect(options: DetectOptions): Promise<DetectReturnValue>;
 
 	/**
@@ -112,31 +107,72 @@ export class face {
 	deleteAPerson(options: DeleteAPersonOptions): Promise<any>;
 
 	/**
-	 * 
+	 * Delete a face from a person. Relative image for the persisted face will also be deleted.
 	 */
-	deleteAPersonFace(options: DeleteAPersonFaceOptions): any;
+	deleteAPersonFace(options: DeleteAPersonFaceOptions): Promise<any>;
 	
-	
+	/**
+	 * Retrieve a person's information, including registered persisted faces, name and userData.
+	 */
 	getAPerson(options: GetAPersonOptions): Promise<GetAPersonReturnValue>;
 	
-	
+	/**
+	 * Retrieve information about a persisted face (specified by persistedFaceId, personId and its belonging personGroupId).
+	 */
 	getAPersonFace(options: GetAPersonFaceOptions): Promise<GetAPersonFaceReturnValue>;
 	
+	/**
+	 * List all persons in a person group, and retrieve person information (including personId, name, userData and persistedFaceIds of registered faces of the person).
+	 */
+	listPersonsInAPersonGroup(options: ListPersonsInAPersonGroupOptions): Promise<ListPersonsInAPersonGroupReturnValue>;
+
+	/**
+	 * Update name or userData of a person.
+	 */
+	updateAPerson(options: UpdateAPersonOptions): Promise<any>;
+
+	/**
+	 * Update a person persisted face's userData field.
+	 */
+	updateAPersonFace(options: UpdateAPersonFaceOptions): Promise<any>;
+
+	/**
+	 * Create a new person group with specified personGroupId, name and user-provided userData. 
+	 */
+	createAPersonGroup(options: CreateAPersonGroupOptions): Promise<any>;
 	
-	listPersonsInAPersonGroup(options: any): any;
-	updateAPerson(options: any): any;
-	updateAPersonFace(options: any): any;
-	createAPersonGroup(options: any): any;
-	
-	
-	deleteAPersonGroup(options: DeleteAPersonGroupOptions): any;
+	/**
+	 * Delete an existing person group. Persisted face images of all people in the person group will also be deleted.
+	 */
+	deleteAPersonGroup(options: DeleteAPersonGroupOptions): Promise<any>;
+
+	/**
+	 * Retrieve the information of a person group, including its name and userData. 
+	 * This API returns person group information only, use Person - List Persons in a Person Group instead to retrieve person information under the person group.
+	 */
 	getAPersonGroup(options: GetAPersonGroupOptions): Promise<GetAPersonGroupReturnValue>;
+	
+	/**
+	 * Retrieve the training status of a person group (completed or ongoing). 
+	 * Training can be triggered by the Person Group - Train Person Group API. 
+	 * The training will process for a while on the server side.
+	 */
 	getPersonGroupTrainingStatus(options: GetPersonGroupTrainingStatusOptions): Promise<GetPersonGroupTrainingStatusReturnValue>;
 	
+	/**
+	 * List person groups and their information.
+	 */
+	listPersonGroups(options: ListPersonGroupsOptions): Promise<ListPersonGroupsReturnValue>;
 	
-	listPersonGroups(options: any): any;
-	trainPersonGroup(options: any): any;
-	updateAPersonGroup(options: any): any;
+	/**
+	 * Queue a person group training task, the training task may not be started immediately. 
+	 */
+	trainPersonGroup(options: TrainPersonGroupOptions): Promise<any>;
+	
+	/**
+	 * Update an existing person group's display name and userData. The properties which does not appear in request body will not be updated.
+	 */
+	updateAPersonGroup(options: UpdateAPersonGroupOptions): Promise<any>;
 }
 
 //#region detect (DONE)
@@ -869,6 +905,7 @@ export interface AddAPersonFaceReturnValue {
 
 export interface CreateAPersonOptions {
 	parameters: CreateAPersonParameters,
+	body: CreateAPersonBody,
 	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
 }
 
@@ -876,8 +913,10 @@ export interface CreateAPersonParameters {
 	/**
 	 * personGroupId of the target person group, created by Person Group - Create a Person Group.
 	 */
-	personGroupId: string,
+	personGroupId: string
+}
 
+export interface CreateAPersonBody {
 	/**
 	 * Display name of the target person. The maximum length is 128.
 	 */
@@ -913,4 +952,237 @@ export interface DeleteAPersonParameters {
 	 * The target personId to delete.
 	 */
 	personId: String
+}
+
+export interface DeleteAPersonFaceOptions {
+	parameters: DeleteAPersonFaceParameters,
+	headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface DeleteAPersonFaceParameters {
+
+	/**
+	 * Specifying the person group containing the target person.
+	 */
+	personGroupId: String,
+
+	/**
+	 * Specifying the person that the target persisted face belong to.
+	 */
+	personId: String,
+
+	/**
+	 * The persisted face to remove. This persistedFaceId is returned from Person - Add a Person Face.
+	 */
+	persistedFaceId: String
+}
+
+export interface ListPersonsInAPersonGroupOptions {
+	parameters: ListPersonsInAPersonGroupParameters,
+	headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface ListPersonsInAPersonGroupParameters {
+
+	/**
+	 * personGroupId of the target person group.
+	 */
+	personGroupId: String,
+	
+	/**
+	 * List persons from the least personId greater than the "start". It contains no more than 64 characters. Default is empty.
+	 */
+	start?: String,
+
+	/**
+	 * The number of persons to list, ranging in [1, 1000]. Default is 1000.
+	 */
+	top?: number
+}
+
+export interface ListPersonsInAPersonGroupReturnValue {
+	/**
+	 * 	personId of the person in the person group.
+	 */
+	"personId":	String,
+
+	/**
+	 * Person's display name.
+	 */
+	"name": String,	
+
+	/**
+	 * User-provided data attached to the person.
+	 */
+	"userData":	String,	
+
+	/**
+	 * persistedFaceId array of registered faces of the person.
+	 */
+	"persistedFaceIds":	String[]	
+}
+
+export interface UpdateAPersonOptions {
+	parameters: UpdateAPersonParameters,
+	body: UpdateAPersonBody,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
+
+export interface UpdateAPersonParameters {
+	
+	/**
+	 * Specifying the person group containing the target person.
+	 */
+	personGroupId: String,
+
+	/**
+	 * Specifying the person that the target persisted face belong to.
+	 */
+	personId: String
+}
+
+export interface UpdateAPersonBody {
+	
+	/**
+	 * Target person's display name. Maximum length is 128.
+	 */
+	name: String,	
+
+	/**
+	 * User-provided data attached to the person. Maximum length is 16KB.
+	 */
+	userData: String	
+}
+
+export interface UpdateAPersonFaceOptions {
+	parameters: UpdateAPersonFaceParameters,
+	body: UpdateAPersonFaceBody,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
+
+export interface UpdateAPersonFaceParameters {
+	
+	/**
+	 * Specifying the person group containing the target person.
+	 */
+	personGroupId: String,
+
+	/**
+	 * Specifying the person that the target persisted face belong to.
+	 */
+	personId: String,
+
+	/**
+	 * persistedFaceId of target face, which is persisted and will not expire.
+	 */
+	persistedFaceId: String
+}
+
+export interface UpdateAPersonFaceBody {
+	/**
+	 * Attach userData to person's persisted face. The size limit is 1KB.
+	 */
+	userData?: String
+}
+
+export interface CreateAPersonGroupOptions {
+	parameters: CreateAPersonGroupParameters,
+	body: CreateAPersonGroupBody,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
+
+export interface CreateAPersonGroupParameters {
+	
+	/**
+	 * User-provided personGroupId as a string. The valid characters include numbers, English letters in lower case, '-' and '_'. 
+	 * The maximum length of the personGroupId is 64.
+	 */
+	personGroupId: String
+}
+
+export interface CreateAPersonGroupBody {
+	/**
+	 * Person group display name. The maximum length is 128.
+	 */
+	name: String,	
+
+	/**
+	 * User-provided data attached to the person group. The size limit is 16KB.
+	 */
+	userData?: String	
+}
+
+export interface ListPersonGroupsOptions {
+	parameters: ListPersonGroupsParameters,
+	headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface ListPersonGroupsParameters {
+
+	/**
+	 * List person groups from the least personGroupId greater than the "start". 
+	 * It contains no more than 64 characters. Default is empty.
+	 */
+	start?: String,
+	
+	/**
+	 * The number of person groups to list, ranging in [1, 1000]. Default is 1000.
+	 */
+	top?: number
+}
+
+export interface ListPersonGroupsReturnValue {
+	
+	/**
+	 * personGroupId of the existing person groups, created in Person Group - Create a Person Group.
+	 */
+	"personGroupId":  String,	
+	
+	/**
+	 * Person group's display name.
+	 */
+	"name": String,
+	
+	/**
+	 * User-provided data attached to this person group.
+	 */
+	"userData":	String	
+}
+
+export interface TrainPersonGroupOptions {
+	parameters: TrainPersonGroupParameters,
+	headers: OcpApimSubscriptionKeyHeaders
+}
+
+export interface TrainPersonGroupParameters {
+
+	/**
+	 * Target person group to be trained.
+	 */
+	personGroupId: String
+}
+
+export interface UpdateAPersonGroupOptions {
+	parameters: UpdateAPersonGroupParameters,
+	body: UpdateAPersonGroupBody,
+	headers: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+}
+
+export interface UpdateAPersonGroupParameters {
+	/**
+	 * personGroupId of the person group to be updated.
+	 */
+	personGroupId: String
+}
+
+export interface UpdateAPersonGroupBody {
+	/**
+	 * Person group's display name. The maximum is 128.
+	 */
+	name: String,
+	
+	/**
+	 * User-provided data attached to this person group. The size limit is 16KB.
+	 */
+	userData:	String	
 }
