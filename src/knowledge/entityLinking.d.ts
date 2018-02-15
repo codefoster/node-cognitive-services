@@ -11,7 +11,7 @@ export class entityLinking {
 
 export interface LinkEntityOptions {
 	parameters: LinkEntityParameters,
-	headers: ContentTypeHeaders,
+	headers?: ContentTypeHeaders,
 	body: string
 }
 

@@ -106,10 +106,10 @@ export interface CalcHistogramPostOptions {
 
 export interface CalcHistogramPostBody {
 	expr: string,
-	model: any,
-	attributes: string,
-	count: number,
-	offset: number
+	model?: any,
+	attributes?: string,
+	count?: number,
+	offset?: number
 }
 
 //Evaluate
@@ -150,14 +150,6 @@ export interface EvaluateParameters {
 	attributes?: string,
 }
 
-export interface EvaluateBody {
-	expr: string,
-	model: any,
-	attributes: string,
-	count: number,
-	offset: number
-}
-
 export interface EvaluateReturnValue {
 	expr: string,
 	entities: {
@@ -170,13 +162,20 @@ export interface EvaluateReturnValue {
 			AuId: number
 		}[]
 	}[]
-
 }
 
 //Evaluate POST
 export interface EvaluatePostOptions {
 	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
-	body?: EvaluateBody
+	body: EvaluatePostBody
+}
+
+export interface EvaluatePostBody {
+	expr: string,
+	model?: any,
+	attributes?: string,
+	count?: number,
+	offset?: number
 }
 
 //Get Similarity
@@ -199,9 +198,9 @@ export interface GetSimilarityParameters {
 
 //Graph Search
 export interface GraphSearchOptions {
-	body?: GraphSearchBody,
+	body: GraphSearchBody,
 	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
-	parameters?: GraphSearchParameters
+	parameters: GraphSearchParameters
 }
 
 export interface GraphSearchParameters {
@@ -236,7 +235,7 @@ export interface GraphSearchReturnValue {
 //Interpret
 export interface InterpretOptions {
 	parameters?: InterpretParameters,
-	headers: OcpApimSubscriptionKeyHeaders
+	headers?: OcpApimSubscriptionKeyHeaders
 }
 
 export interface InterpretParameters {
@@ -288,19 +287,51 @@ export interface InterpretReturnValue {
 
 //Interpret POST
 export interface InterpretPostOptions {
-	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
+	body: InterpretPostBody
+}
+
+export interface InterpretPostBody {
+	/**
+	 * Query entered by user. If complete is set to 1, query will be interpreted as a prefix for generating query auto-completion suggestions.
+	 */
+	query: string,
+
+	/**
+	 * 1 means that auto-completion suggestions are generated based on the grammar and graph data.
+	 */
+	complete?: boolean,
+
+	/**
+	 * Maximum number of interpretations to return.
+	 */
+	count?: number,
+
+	/**
+	 * Index of the first interpretation to return. For example, count=2&offset=0 returns interpretations 0 and 1. count=2&offset=2 returns interpretations 2 and 3.
+	 */
+	offset?: number,
+
+	/**
+	 * Timeout in milliseconds. Only interpretations found before the timeout has elapsed are returned.
+	 */
+	timeout?: number,
+
+	/**
+	 * Name of the model that you wish to query. Currently, the value defaults to "latest".
+	 */
+	model?: string
 }
 
 //Post Similarity
 export interface PostSimilarityOptions {
 	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
-	body?: string
+	body: PostSimilarityBody
 }
 
-export interface PostSimilarityParameters {
-	/**
-	 * POST request body has a limitation of 1MB.
-	 */
-	body: string
+export interface PostSimilarityBody {
+	s1: string,
+	s2: string
 }
+
 
