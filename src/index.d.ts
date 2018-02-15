@@ -35,7 +35,10 @@ export interface OcpApimSubscriptionKeyHeaders{
 	 */
 	"Ocp-Apim-Subscription-Key"?: String
 }
-export type ContentTypeHeaderTypes = 'text/plain'|'application/json'|'application/octet-stream'|'application/x-www-form-urlencoded'|'multipart/form-data';
+export type ContentTypeHeaderTypes =  'text/json'|'application/xml'|
+									  'text/xml'|'text/plain'|'application/json'|
+									  'application/octet-stream'|
+									  'application/x-www-form-urlencoded'|'multipart/form-data';
 
 export interface CommonConstructorOptions {
 	apiKey: string,
