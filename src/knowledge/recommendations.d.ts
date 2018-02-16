@@ -1568,7 +1568,7 @@ export interface UploadUsageEventParameters {
 
 export interface UploadUsageEventReturnValue {
 	userId: string,
-	buildId: 0,
+	buildId?: number,
 	events: {
 		eventType: string,
 		itemId: string,
