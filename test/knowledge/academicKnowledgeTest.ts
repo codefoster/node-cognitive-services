@@ -19,8 +19,7 @@ describe('Academic Knowledge', () => {
 
     describe('calcHistogram', () =>{
        it('calculate the distribution of attribute values for a set of paper entities', (done) =>{
-           
-        acadmicKnowledgeClient.calcHistogram({
+           acadmicKnowledgeClient.calcHistogram({
                parameters: { expr: "And(Composite(AA.AuN=='jaime teevan'),Y>2012)",model: "latest"},
                headers : {"Ocp-Apim-Subscription-Key": "f2152d2559c749bb830af53f774d3dfd" }
            }).then((response) =>{
