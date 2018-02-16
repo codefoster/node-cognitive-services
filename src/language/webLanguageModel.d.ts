@@ -1,4 +1,4 @@
-import { ContentTypeHeaders, CommonConstructorOptions } from "../index";
+import { ContentTypeHeaders, CommonConstructorOptions, OcpApimSubscriptionKeyHeaders } from "../index";
 
 export class webLanguageModel {
 	constructor(options: CommonConstructorOptions);
@@ -68,7 +68,7 @@ export interface BreakIntoWordsReturnValue {
 export interface CalculateConditionalProbabilityOptions {
 	parameters: CalculateConditionalProbabilityParameters,
 	headers: ContentTypeHeaders,
-	body: { "url"?: string } | any
+	body: CalculateConditionalProbabilityBody
 }
 
 export interface CalculateConditionalProbabilityParameters {
@@ -91,6 +91,13 @@ export interface CalculateConditionalProbabilityParameters {
 	}[]
 }
 
+export interface CalculateConditionalProbabilityBody {
+	queries: {
+		words: string,
+		word: string
+	}[]
+}
+
 export interface CalculateConditionalProbabilityReturnValue {
 	queries: {
 		words: string,
@@ -101,8 +108,8 @@ export interface CalculateConditionalProbabilityReturnValue {
 
 export interface CalculateJointProbabilityOptions {
 	parameters: CalculateJointProbabilityParameters,
-	headers: ContentTypeHeaders,
-	body: { "url"?: string } | any
+	headers?: ContentTypeHeaders & OcpApimSubscriptionKeyHeaders,
+	body: CalculateJointProbabilityBody
 }
 
 export interface CalculateJointProbabilityParameters {
@@ -114,14 +121,11 @@ export interface CalculateJointProbabilityParameters {
 	/**
 	 * The order of N-gram. If not specified, use default value 5 .Supported value: 1, 2, 3, 4, 5.
 	 */
-	order?: number,
+	order?: number
+}
 
-	/**
-	 * Array of queries
-	 */
-	queries?: {
-		words: string
-	}[]
+export interface CalculateJointProbabilityBody {
+	queries: string[]
 }
 
 export interface CalculateJointProbabilityReturnValue {
